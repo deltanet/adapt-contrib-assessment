@@ -71,7 +71,7 @@ define([
             //save original children
             this._originalChildModels = this.getChildren().models;
             //collect all question components
-            this._currentQuestionComponents = this.findDescendantModels('components', {where: { _isQuestionType: true }});
+            this._currentQuestionComponents = this.findDescendantModels('components', {where: { _isQuestionType: true, _isAvailable: true }});
             this.set('_currentQuestionComponentIds', this._currentQuestionComponents.map(function(comp) {
                 return comp.get('_id');
             }));
@@ -142,7 +142,7 @@ define([
 
             this.getChildren().models = quizModels;
 
-            this._currentQuestionComponents = this.findDescendantModels('components', {where: { _isQuestionType: true }});
+            this._currentQuestionComponents = this.findDescendantModels('components', {where: { _isQuestionType: true, _isAvailable: true }});
             this.set('_currentQuestionComponentIds', this._currentQuestionComponents.map(function(comp) {
                 return comp.get('_id');
             }));
