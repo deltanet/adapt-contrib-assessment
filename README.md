@@ -39,18 +39,18 @@ With the [Adapt CLI](https://github.com/adaptlearning/adapt-cli) installed, run 
 #### *course.json*  
 The following attributes, set within *course.json*, configure the defaults for all assessments in the course. These attributes can be overridden on a per assessment basis by setting attributes of the same names in *articles.json*.
 
-**\_assessment** (object): The Assessment object that contains values for **\_scoreToPass** and **\_isPercentageBased**.
+**_assessment** (object): The Assessment object that contains values for **_scoreToPass** and **_isPercentageBased**.
 
->**\_scoreToPass** (integer): This is the achievement score required to pass the assessment. The learner's score must be greater than or equal to this score. It is the cumulative raw score needed to pass unless **\_isPercentageBased** is set to `true`.
+>**_scoreToPass** (integer): This is the achievement score required to pass the assessment. The learner's score must be greater than or equal to this score. It is the cumulative raw score needed to pass unless **_isPercentageBased** is set to `true`.
 
->**\_isPercentageBased** (boolean): Determines whether the value of **\_scoreToPass** should be treated as a percentage or as the raw score. For example, if **\_isPercentageBased** is set to `true`, a **\_scoreToPass** value of `60` will be treated as `60%`.
+>**_isPercentageBased** (boolean): Determines whether the value of **_scoreToPass** should be treated as a percentage or as the raw score. For example, if **_isPercentageBased** is set to `true`, a **_scoreToPass** value of `60` will be treated as `60%`.
 
 <div float align=right><a href="#top">Back to Top</a></div>
 
 #### *articles.json*  
 The following attributes are appended to a particular article within *articles.json*. Multiple assessments may be used within a course, but they must be configured in separate articles.
 
-**\_assessment** (object): The Assessment object that contains values for **\_isEnabled**, **\_id**, **\_isPercentageBased**, **\_scoreToPass**, **\_banks**, **\_randomisation**, **\_questions**, **\_includeInTotalScore**, **\_assessmentWeight**, **\_isResetOnRevisit**, and **\_attempts**.  
+**_assessment** (object): The Assessment object that contains values for **_isEnabled**, **_id**, **_isPercentageBased**, **_scoreToPass**, **_banks**, **_randomisation**,  **_questions**, **_includeInTotalScore**, **_assessmentWeight**, **_isResetOnRevisit**, and **_attempts**.  
 
 >**_isEnabled** (boolean): Turns the assessment on or off. Acceptable values are `true` or `false`.
 
@@ -58,21 +58,13 @@ The following attributes are appended to a particular article within *articles.j
 
 >**\_suppressMarking** (boolean): Suppresses the assessment question marking until completion of the assessment or until all attempts have been exhausted. Acceptable values are `true` or `false`.
 
->**\_scoreToPass** (number): This is the achievement score required to pass the assessment. The learner's score must be greater than or equal to this score. It is the cumulative raw score needed to pass unless **\_isPercentageBased** is set to `true`.    
+>**\_isPercentageBased** (boolean): Determines whether the value of **_scoreToPass** should be treated as a percentage or as the raw score. For example, if **\_isPercentageBased** is set to `true`, a **\_scoreToPass** value of `60` will be treated as `60%`.   
 
->**\_isPercentageBased** (boolean): Determines whether the value of **\_scoreToPass** should be treated as a percentage or as the raw score. For example, if **\_isPercentageBased** is set to `true`, a **\_scoreToPass** value of `60` will be treated as `60%`.   
+>**\_scoreToPass** (number): This is the achievement score required to pass the assessment. The learner's score must be greater than or equal to this score. It is the cumulative raw score needed to pass unless **_isPercentageBased** is set to `true`.    
 
->**\_includeInTotalScore** (boolean): Determines if the score from this assessment should be sent to the LMS. The score sent is a percentage according to **\_assessmentWeight.**   
+>**\_includeInTotalScore** (boolean): Determines if the score from this assessment should be sent to the LMS. The score sent is a percentage according to _assessmentWeight.   
 
->**\_assessmentWeight** (number): If there are multiple assessments in the course, this value controls the proportion of the LMS score which is attributed to this assessment. 1 = 100%.    
-
->**\_isResetOnRevisit** (boolean): Controls whether the assessment should be reset automatically (up to the number of available attempts) when a user revisits the page. Acceptable values are `true` or `false`.   
-
->**\_attempts** (number): Controls the number of attempts available to the user. Any of the following values may be used to indicate an infinite number of attempts: `-1`, `0`, `null`, `undefined`, `"infinite"`.  
-
->**\_allowResetIfPassed** (boolean): Controls whether the assessment may be reset after it has been passed (whilst there are attempts remaining). Acceptable values are `true` or `false`.  
-
->**\_banks** (object): If **\_banks** is enabled, its attributes determine which questions from a series of question banks/buckets will be presented to the learner. Contains values for **\_isEnabled**, **\_split**, and **\_randomisation**. (Use either **\_banks** or **\_randomisation**; the value of their **\_isEnabled** attributes must be opposite booleans. If **\_banks** is enabled, blocks must be organized into questions banks by adding the **\_quizBankID** attribute referenced below. You must also have at least two banks; if you only have one bank of questions then the **\_randomisation** functionality is likely to be more appropriate to your needs).
+>**\_banks** (object): If **\_banks** is enabled, its attributes determine which questions from a series of question banks/buckets will be presented to the learner. Contains values for **\_isEnabled**, **\_split**, and **\_randomisation**.   (Use either **\_banks** or **\_randomisation**; the value of their **\_isEnabled** attributes must be opposite booleans. If **\_banks** is enabled, blocks must be organized into questions banks by adding the **\_quizBankID** attribute referenced below. You must also have at least two banks; if you only have one bank of questions then the **\_randomisation** functionality is likely to be more appropriate to your needs).
 
 >>**\_isEnabled** (boolean): Turns on or off the ability to use question banks.  
 
@@ -96,6 +88,14 @@ The following attributes are appended to a particular article within *articles.j
 
 >>**\_canShowModelAnswer** (boolean): Determines whether question components within the assessment will show the [**_showCorrectAnswer** button](https://github.com/adaptlearning/adapt_framework/wiki/Core-Buttons) or not if the user answers incorrectly. Acceptable values are `true` or `false`.
 
+>**\_assessmentWeight** (number): If there are multiple assessments in the course, this value controls the proportion of the LMS score which is attributed to this assessment. 1 = 100%.    
+
+>**\_isResetOnRevisit** (boolean): Controls whether the assessment should be reset automatically (up to the number of available attempts) when a user revisits the page. Acceptable values are `true` or `false`.   
+
+>**\_attempts** (number): Controls the number of attempts available to the user. Any of the following values may be used to indicate an infinite number of attempts: `-1`, `0`, `null`, `undefined`, `"infinite"`.  
+
+>**\_allowResetIfPassed** (boolean): Controls whether the assessment may be reset after it has been passed (whilst there are attempts remaining). Acceptable values are `true` or `false`.  
+
 <div float align=right><a href="#top">Back to Top</a></div>
 
 #### *blocks.json*  
@@ -110,6 +110,8 @@ The following attributes are appended to a particular article within *articles.j
 **Numbering randomised questions**
 
 If you need to display sequential question numbers within the component title when the questions are presented in a random order, the variables `{{questionNumber}}` and `{{questionCount}}` can be used within the `displayTitle` & `title` text.
+
+
 
 ### Events
 
@@ -172,10 +174,12 @@ A description of the stateObject returned by the `assessment:complete` event is 
 **Assessment** must be used with [question components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components) that extend and implement Adapt's [`questionView`](https://github.com/adaptlearning/adapt_framework/wiki/Developers-guide:-components#question-components). ~~Each block in an assessment article must contain a question, blocks with only presentation components will not be rendered on restore.~~ As of v2.0.9 blocks containing only presentation components can now safely be included in assessments.
 If data is required to be passed to a SCORM conformant LMS, the [Spoor](https://github.com/adaptlearning/adapt-contrib-spoor) extension must be enabled. If [question components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components) are required to display feedback after attempts, the [Tutor](https://github.com/adaptlearning/adapt-contrib-tutor) extension must be enabled. And if it is appropriate to display performance results to the learner, a separate component such as [Assessment Results](https://github.com/adaptlearning/adapt-contrib-assessmentResults) is required.
 
+**Important:** if targeting IE8, it is recommended to limit each assessment to a maximum of 12 questions. When using question banks, the recommendation is a limit of 32 questions with a maximum of 12 questions drawn. These limits are recommended to help avoid the popup warning "A script on this page is causing Internet Explorer to run slowly". See https://support.microsoft.com/en-gb/kb/175500 for more information.
+
 ----------------------------
-**Version number:**  4.0.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
-**Framework versions:** 5+  
+**Version number:**  3.1.1   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Framework versions:** 3.2+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-assessment/graphs/contributors)  
 **Accessibility support:** WAI AA  
-**RTL support:** Yes  
-**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE11, Safari 12+13 for macOS/iOS/iPadOS, Opera  
+**RTL support:** yes  
+**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE11, IE Mobile 11, Safari 11+12 for macOS+iOS, Opera  
