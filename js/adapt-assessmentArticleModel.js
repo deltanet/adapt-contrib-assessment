@@ -456,9 +456,13 @@ define([
             var questionComponents = this._currentQuestionComponents;
             for (var i = 0, l = questionComponents.length; i < l; i++) {
                 var question = questionComponents[i];
-                if (question.get('_isCorrect') &&
-                    question.get('_questionWeight')) {
-                    score += question.get('_questionWeight');
+
+                if (this.get('_assessment')._isOptionScoring) {
+                    score += question.get('_numberOfCorrectAnswers');
+                } else {
+                    if (question.get('_isCorrect') && question.get('_questionWeight')) {
+                        score += question.get('_questionWeight');
+                    }
                 }
             }
             return score;

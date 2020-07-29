@@ -95,6 +95,15 @@
                   "help": "The minimum score required by the learner to pass the assessment.",
                   "validators": ["number"]
                 },
+                "_isOptionScoring": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "title": "Option Scoring Enabled",
+                  "inputType": "Checkbox",
+                  "help": "Determines whether the correct number of options in each question is used for the score.",
+                  "validators": []
+                },
                 "_includeInTotalScore": {
                   "type": "boolean",
                   "default": true,
