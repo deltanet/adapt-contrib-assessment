@@ -132,12 +132,82 @@ define([
                 }
             }
 
+            var questionBanksEnabled = this.get('_assessment')._banks._isEnabled;
+            var questionBanksLoaded = this._questionBanks;
+
             if (!quizModels) {
-                // leave the order as before, completed or not
-                quizModels = this.getChildren().models;
+                if (questionBanksEnabled && !questionBanksLoaded) {
+
+                  this.getChildren().models = this._originalChildModels;
+                  if(assessmentConfig._banks &&
+                          assessmentConfig._banks._isEnabled &&
+                          assessmentConfig._banks._split.length > 1) {
+
+                      quizModels = this._setupBankedAssessment();
+                  } else if(assessmentConfig._randomisation &&
+                          assessmentConfig._randomisation._isEnabled) {
+
+                      quizModels = this._setupRandomisedAssessment();
+                  }
+
+                } else {
+                  if (this.getChildren().models.length < this._originalChildModels.length) {
+
+                    this.getChildren().models = this._originalChildModels;
+                    if(assessmentConfig._banks &&
+                            assessmentConfig._banks._isEnabled &&
+                            assessmentConfig._banks._split.length > 1) {
+
+                        quizModels = this._setupBankedAssessment();
+                    } else if(assessmentConfig._randomisation &&
+                            assessmentConfig._randomisation._isEnabled) {
+
+                        quizModels = this._setupRandomisedAssessment();
+                    }
+                    quizModels = this.getChildren().models;
+
+                  } else {
+                    // leave the order as before, completed or not
+                    quizModels = this.getChildren().models;
+                  }
+                }
             } else if ( quizModels.length === 0 ) {
-                quizModels = this.getChildren().models;
-                console.warn('assessment: Not enough unique questions to create a fresh assessment, using last selection');
+                if (questionBanksEnabled && !questionBanksLoaded) {
+
+                  this.getChildren().models = this._originalChildModels;
+                  if(assessmentConfig._banks &&
+                          assessmentConfig._banks._isEnabled &&
+                          assessmentConfig._banks._split.length > 1) {
+
+                      quizModels = this._setupBankedAssessment();
+                  } else if(assessmentConfig._randomisation &&
+                          assessmentConfig._randomisation._isEnabled) {
+
+                      quizModels = this._setupRandomisedAssessment();
+                  }
+
+                } else {
+                  if (this.getChildren().models.length < this._originalChildModels.length) {
+
+                    this.getChildren().models = this._originalChildModels;
+                    if(assessmentConfig._banks &&
+                            assessmentConfig._banks._isEnabled &&
+                            assessmentConfig._banks._split.length > 1) {
+
+                        quizModels = this._setupBankedAssessment();
+                    } else if(assessmentConfig._randomisation &&
+                            assessmentConfig._randomisation._isEnabled) {
+
+                        quizModels = this._setupRandomisedAssessment();
+                    }
+                    quizModels = this.getChildren().models;
+
+                  } else {
+                    // leave the order as before, completed or not
+                    quizModels = this.getChildren().models;
+                    console.warn('assessment: Not enough unique questions to create a fresh assessment, using last selection');
+                  }
+                }
             }
 
             this.getChildren().models = quizModels;
