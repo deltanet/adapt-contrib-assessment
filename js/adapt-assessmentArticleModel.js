@@ -111,7 +111,7 @@ define([
                 Adapt.trigger('assessments:preReset', this.getState(), this);
             }
 
-            var quizModels;
+            var quizModels = (this.getChildren().models.length > 0) ? this.getChildren().models : null;
             if (shouldResetAssessment) {
                 this.set({
                     _numberOfQuestionsAnswered: 0,
