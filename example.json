@@ -12,6 +12,7 @@
         "_suppressMarking": false,
         "_scoreToPass" : 60,
         "_correctToPass": 60,
+        "_isOptionScoring": false,
         "_isPercentageBased" : true,
         "_includeInTotalScore": true,
         "_assessmentWeight": 1,

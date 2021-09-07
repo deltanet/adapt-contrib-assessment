@@ -4,11 +4,11 @@
 It is not a single [question component](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components). It is an extension that provides a score for all the [question components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components) contained within a single [article](https://github.com/adaptlearning/adapt_framework/wiki/Framework-in-five-minutes#content-structure) and that communicates the score to the LMS if so configured. It does not display results. Results are presented with the [Assessment Results](https://github.com/adaptlearning/adapt-contrib-assessmentResults) component (for the results from a single assessment) or the [Assessment Results Total](https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal) component (for the results from multiple assessments).
 
 >**Important:**  
->The **Assessment** extension applies to the entire article. Since `_randomisation` may reorder blocks within the article, it is highly recommended to include only question components within the assessment article. 
-> 
+>The **Assessment** extension applies to the entire article. Since `_randomisation` may reorder blocks within the article, it is highly recommended to include only question components within the assessment article.
+>
 > **The Results component must be placed in a separate article, *not* within the assessment article.**
-> 
->Blocks inside an assessment article must contain a question. Any blocks containing only presentation components will not be rendered when the article is restored. 
+>
+>Blocks inside an assessment article must contain a question. Any blocks containing only presentation components will not be rendered when the article is restored.
 
 [Visit the **Assessment** wiki](https://github.com/adaptlearning/adapt-contrib-assessment/wiki) for explanations of key properties and for more information about its functionality such as [restoring state upon revisit](https://github.com/adaptlearning/adapt-contrib-assessment/wiki/Restore-assessment-state).
 
@@ -63,6 +63,8 @@ The following attributes are appended to a particular article within *articles.j
 >**\_scoreToPass** (number): This is the achievement score required to pass the assessment. The learner's score must be greater than or equal to this score. It is the cumulative raw score needed to pass unless **\_isPercentageBased** is set to `true`.    
 
 >**\_correctToPass** (number): This is the achievement correctness required to pass the assessment. The learner's correctness must be greater than or equal to this value. It is the cumulative raw correctness needed to pass unless **\_isPercentageBased** is set to `true`.    
+
+>**\_isOptionScoring** (boolean): Determines whether the correct number of options will be used for the score calculation.    
 
 >**\_isPercentageBased** (boolean): Determines whether the values of **\_scoreToPass** and **\_correctToPass** should be treated as percentages or as the raw score and correctness. For example, if **\_isPercentageBased** is set to `true`, a **\_scoreToPass** value of `60` will be treated as `60%`.   
 
@@ -195,7 +197,7 @@ A description of the stateObject returned by the `assessment:complete` event is 
 If data is required to be passed to a SCORM conformant LMS, the [Spoor](https://github.com/adaptlearning/adapt-contrib-spoor) extension must be enabled. If [question components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#question-components) are required to display feedback after attempts, the [Tutor](https://github.com/adaptlearning/adapt-contrib-tutor) extension must be enabled. And if it is appropriate to display performance results to the learner, a separate component such as [Assessment Results](https://github.com/adaptlearning/adapt-contrib-assessmentResults) is required.
 
 ----------------------------
-**Version number:**  4.5.1   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
+**Version number:**  4.0.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
 **Framework versions:** 5.8+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-assessment/graphs/contributors)  
 **Accessibility support:** WAI AA  

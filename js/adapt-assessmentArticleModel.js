@@ -446,7 +446,21 @@ const AssessmentModel = {
 
   _getScore() {
     const questionComponents = this._getCurrentQuestionComponents();
-    const score = questionComponents.reduce((score, model) => (score += model.score || 0), 0);
+    //const score = questionComponents.reduce((score, model) => (score += model.score || 0), 0);
+
+    // DeltaNet custom optionScoring
+    let score = 0;
+
+    if (this.get('_assessment')._isOptionScoring) {
+      for (let i = 0, l = questionComponents.length; i < l; i++) {
+        const question = questionComponents[i];
+        score += question.get('_numberOfCorrectAnswers');
+      }
+    } else {
+      score = questionComponents.reduce((score, model) => (score += model.score || 0), 0);
+    }
+    // End of custom
+
     return score;
   },
 

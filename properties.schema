@@ -113,6 +113,15 @@
                   "help": "The minimum number of correct questions required by the learner to pass the assessment or the minimum percentage correct if 'Percentage based'.",
                   "validators": ["number"]
                 },
+                "_isOptionScoring": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "title": "Option Scoring Enabled",
+                  "inputType": "Checkbox",
+                  "help": "Determines whether the correct number of options in each question is used for the score.",
+                  "validators": []
+                },
                 "_includeInTotalScore": {
                   "type": "boolean",
                   "default": true,
