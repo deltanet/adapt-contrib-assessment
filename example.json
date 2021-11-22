@@ -20,6 +20,7 @@
         "_suppressMarking": false,
         "_isPercentageBased" : true,
         "_scoreToPass" : 75,
+        "_isOptionScoring": false,
         "_includeInTotalScore": true,
         "_assessmentWeight": 1,
         "_isResetOnRevisit": false,
