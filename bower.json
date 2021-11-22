@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-assessment",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "framework": ">=3.2",
   "homepage": "https://github.com/deltanet/adapt-contrib-assessment",
   "displayName" : "Assessment",
