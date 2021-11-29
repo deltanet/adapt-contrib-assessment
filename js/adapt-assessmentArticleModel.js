@@ -569,7 +569,7 @@ const AssessmentModel = {
     const questions = this.get('_questions');
     for (const question of questions) {
       const questionModel = Adapt.findById(question._id);
-      if (!questionModel.get('_isSubmitted')) {
+      if (questionModel.get('_isAvailable') && !questionModel.get('_isSubmitted')) {
         wereQuestionsRestored = false;
         break;
       }
@@ -688,10 +688,11 @@ const AssessmentModel = {
     } else {
       blocks = state.questions.map(question => Adapt.findById(question._id).getParent());
     }
-    blocks = blocks.filter(block => {
-      const trackingId = block.get('_trackingId');
-      return Number.isInteger(trackingId) && trackingId >= 0;
-    });
+    blocks = [...new Set(blocks)]
+      .filter(block => {
+        const trackingId = block.get('_trackingId');
+        return Number.isInteger(trackingId) && trackingId >= 0;
+      });
     const blockTrackingIds = blocks.map(block => block.get('_trackingId'));
     const blockCompletion = blocks.map(block => {
       const questions = block.findDescendantModels('question');
@@ -734,7 +735,8 @@ const AssessmentModel = {
     const blocks = blockData[0].map(trackingId => Adapt.data.findWhere({ _trackingId: trackingId }));
 
     if (blocks.length) {
-      this.getChildren().models = blocks;
+      const nonBlockChildren = this.getChildren().models.filter(model => !model.isTypeGroup('block'));
+      this.getChildren().models = blocks.concat(nonBlockChildren);
     }
 
     const _questions = [];
