@@ -64,7 +64,8 @@ const AssessmentModel = {
       _lastAttemptScoreAsPercent: 0,
       _attempts: attemptsLeft,
       _attemptsLeft: attemptsLeft,
-      _attemptsSpent: 0
+      _attemptsSpent: 0,
+      _includeInTotalScore: assessmentConfig._includeInTotalScore
     });
 
     this.listenToOnce(Adapt, 'app:dataReady', this._onDataReady);
@@ -796,7 +797,7 @@ const AssessmentModel = {
       correctToPass: assessmentConfig._correctToPass,
       questionCount: this.get('_questionCount'),
       isPass: this.get('_isPass'),
-      includeInTotalScore: assessmentConfig._includeInTotalScore,
+      includeInTotalScore: this.get('_includeInTotalScore'),
       assessmentWeight: assessmentConfig._assessmentWeight,
       attempts: this.get('_attempts'),
       attemptsSpent: this.get('_attemptsSpent'),
