@@ -264,7 +264,7 @@ const AssessmentModel = {
 
   _setupQuestionListeners() {
     this._removeQuestionListeners();
-    this.listenTo(this.getChildren(), 'change:_isInteractionComplete', this._onBlockCompleted);
+    this.listenTo(this, 'bubble:change:_isInteractionComplete', this._onCompletionEvent);
   },
 
   _checkNumberOfQuestionsAnswered() {
@@ -274,7 +274,12 @@ const AssessmentModel = {
   },
 
   _removeQuestionListeners() {
-    this.stopListening(this.getChildren(), 'change:_isInteractionComplete', this._onBlockCompleted);
+    this.stopListening(this, 'bubble:change:_isInteractionComplete', this._onCompletionEvent);
+  },
+
+  _onCompletionEvent(event) {
+    if (event.target?.isTypeGroup('block')) return this._onBlockCompleted(event.target, event.value);
+    if (event.target?.isTypeGroup('questions')) return this._onQuestionCompleted(event.target, event.value);
   },
 
   _onBlockCompleted(blockModel, value) {
@@ -291,8 +296,7 @@ const AssessmentModel = {
     if (value === false) return;
     if (!questionModel.get('_isInteractionComplete')) return;
 
-    let numberOfQuestionsAnswered = this.get('_numberOfQuestionsAnswered');
-    numberOfQuestionsAnswered++;
+    const numberOfQuestionsAnswered = this._getCurrentQuestionComponents().reduce((count, question) => (count += question.get('_isSubmitted') ? 1 : 0), 0);
     this.set('_numberOfQuestionsAnswered', numberOfQuestionsAnswered);
 
     this._updateQuestionsState();
