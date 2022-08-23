@@ -48,6 +48,12 @@
               "description": "The minimum number of correct questions required by the learner to pass the assessment or the minimum percentage correct if percentage-based",
               "default": 60
             },
+            "_isOptionScoring": {
+              "type": "boolean",              
+              "title": "Option Scoring Enabled",
+              "description": "Determines whether the correct number of options in each question is used for the score.",
+              "default": false
+            },
             "_includeInTotalScore": {
               "type": "boolean",
               "title": "Include score in course total",
