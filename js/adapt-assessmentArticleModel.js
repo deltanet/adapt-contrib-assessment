@@ -199,6 +199,17 @@ const AssessmentModel = {
   _setupBanks() {
     const assessmentConfig = this.getConfig();
     const bankSplits = assessmentConfig._banks._split.split(',');
+
+    this.findDescendantModels('block')
+      .filter(block => block.get('_isAvailable') && block.findDescendantModels('question').length > 0).forEach(block => {
+        const quizBankId = block.get('_assessment')?._quizBankId;
+
+        const isInvalidNumber = (isNaN(quizBankId) || quizBankId < 1);
+        const isOutOfBounds = (quizBankId > bankSplits.length);
+        if (isInvalidNumber) logging.warn(`Bank ID ${quizBankId} is not a valid number`);
+        if (isOutOfBounds) logging.warn(`Bank ID ${quizBankId} exceeds the number of available splits (${bankSplits.length})`);
+    });
+
     const hasBankSplitsChanged = (bankSplits.length !== this._questionBanks?.length);
     if (hasBankSplitsChanged) {
       // Generate new question banks if the split has changed
@@ -261,7 +272,7 @@ const AssessmentModel = {
 
   _onCompletionEvent(event) {
     if (event.target?.isTypeGroup('block')) return this._onBlockCompleted(event.target, event.value);
-    if (event.target?.isTypeGroup('questions')) return this._onQuestionCompleted(event.target, event.value);
+    if (event.target?.isTypeGroup('question')) return this._onQuestionCompleted(event.target, event.value);
   },
 
   _onBlockCompleted(blockModel, value) {
@@ -579,7 +590,7 @@ const AssessmentModel = {
       !assessmentConfig._isResetOnRevisit &&
       !isPageReload &&
       !force) {
-      // eslint-disable-next-line node/no-callback-literal
+      // eslint-disable-next-line n/no-callback-literal
       if (typeof callback === 'function') callback(false);
       return false;
     }
@@ -599,18 +610,18 @@ const AssessmentModel = {
     const allowResetIfPassed = this.get('_assessment')._allowResetIfPassed;
     // stop resetting if no attempts left and allowResetIfPassed is false
     if (!this._isAttemptsLeft() && !force && !allowResetIfPassed) {
-      // eslint-disable-next-line node/no-callback-literal
+      // eslint-disable-next-line n/no-callback-literal
       if (typeof callback === 'function') callback(false);
       return false;
     }
 
     if (!isPageReload) {
       this._setupAssessmentData(force);
-      // eslint-disable-next-line node/no-callback-literal
+      // eslint-disable-next-line n/no-callback-literal
       if (typeof callback === 'function') callback(true);
     } else {
       this._reloadPage(() => {
-        // eslint-disable-next-line node/no-callback-literal
+        // eslint-disable-next-line n/no-callback-literal
         if (typeof callback === 'function') callback(true);
       });
     }
